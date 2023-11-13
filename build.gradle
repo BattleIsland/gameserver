@@ -20,7 +20,10 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
     compileOnly 'org.projectlombok:lombok:1.18.22'
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    implementation 'javax:javaee-api:7.0'
+    implementation 'javax.websocket:javax.websocket-api:1.1'
 }
+
 
 tasks.named('bootBuildImage') {
 	builder = 'paketobuildpacks/builder-jammy-base:latest'
