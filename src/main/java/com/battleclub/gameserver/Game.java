@@ -16,7 +16,7 @@ import lombok.Data;
 @Component
 @Data
 public class Game {
-    record Coordinates(int x, int y) {}
+    record Coordinates(double x, double y) {}
     record Item(String id, Coordinates coords, String type) {}
     record Player(String userId, int health, int direction, Coordinates coords, int weaponIdx) {}
     record GameState(ThisPlayerState thisPlayerState, List<OtherPlayerState> otherPlayerStates, List<Item> items) {}
@@ -59,7 +59,7 @@ public class Game {
     }
 
     public void addPlayer(String userId) {
-        players.put(userId, new Player(userId, 100, 0, new Coordinates(0, 0), 1));   
+        players.put(userId, new Player(userId, 100, 0, new Coordinates(408*(players.size()+1), 397*(players.size()+1)), 1));   
     }
 
     public void removePlayer(String userId) {

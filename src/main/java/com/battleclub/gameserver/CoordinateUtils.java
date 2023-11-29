@@ -15,6 +15,6 @@ public class CoordinateUtils {
     }
 
     public Coordinates divide(double divisor, Coordinates a) {
-        return new Coordinates((int) (a.x() / divisor), (int) (a.y() / divisor));
+        return new Coordinates(a.x() / divisor, a.y() / divisor);
     }
 }

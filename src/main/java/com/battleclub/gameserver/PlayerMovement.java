@@ -17,14 +17,14 @@ public class PlayerMovement {
     private static int MULTIPLIER = 1;
 
     private static Map<String, Coordinates> KEY_TO_MOVEMENT = Map.of(
-        "w", new Coordinates(0, UNIT),
-        "a", new Coordinates(UNIT, 0),
-        "s", new Coordinates(0, -UNIT),
-        "d", new Coordinates(-UNIT, 0),
-        "ArrowUp", new Coordinates(0, UNIT),
-        "ArrowLeft", new Coordinates(UNIT, 0),
-        "ArrowDown", new Coordinates(0, -UNIT),
-        "ArrowRight", new Coordinates(-UNIT, 0)
+        "w", new Coordinates(0, -UNIT),
+        "a", new Coordinates(-UNIT, 0),
+        "s", new Coordinates(0, UNIT),
+        "d", new Coordinates(UNIT, 0),
+        "ArrowUp", new Coordinates(0, -UNIT),
+        "ArrowLeft", new Coordinates(-UNIT, 0),
+        "ArrowDown", new Coordinates(0, UNIT),
+        "ArrowRight", new Coordinates(UNIT, 0)
     );
 
     public Coordinates calculateNetMovement(List<String> keysClicked) {
