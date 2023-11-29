@@ -25,6 +25,9 @@ public class PlayerInputController {
     @Autowired
     private CoordinateUtils coordinateUtils;
 
+    @Autowired
+    private WeaponSelection weaponSelection;
+
     @MessageMapping("/accept_input")
     public void acceptInput(PlayerInputMessage playerInputMessage, @Header("simpSessionId") String sessionId) {
         String userId = users.getUsers().get(sessionId).userId();
@@ -33,8 +36,11 @@ public class PlayerInputController {
             // net movement is calculated from player input keys selected
             Coordinates netMovement = playerMovement.calculateNetMovement(playerInputMessage.getKeysSelected());
             Coordinates newCoords = coordinateUtils.add(netMovement, oldPlayerValue.coords());
+            int inputWeaponIdx = weaponSelection.getWeaponIndex(playerInputMessage.getKeysSelected());
+            // if -1, then retain old weapon idx else use input weapon idx
+            int newWeaponIdx = inputWeaponIdx == -1 ? oldPlayerValue.weaponIdx() : inputWeaponIdx;
             // new player value is composed of net movement + old player coords and player input angle
-            Player newPlayerValue = new Player(userId, oldPlayerValue.health(), playerInputMessage.getAngle(), newCoords);
+            Player newPlayerValue = new Player(userId, oldPlayerValue.health(), playerInputMessage.getAngle(), newCoords, newWeaponIdx);
             // records are immutable so we need to copy over all old values, merge them with new ones and then add back into concurrent map
             game.players.put(userId, newPlayerValue);
         }

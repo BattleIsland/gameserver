@@ -18,7 +18,7 @@ import lombok.Data;
 public class Game {
     record Coordinates(int x, int y) {}
     record Item(String id, Coordinates coords, String type) {}
-    record Player(String userId, int health, int direction, Coordinates coords) {}
+    record Player(String userId, int health, int direction, Coordinates coords, int weaponIdx) {}
     record GameState(ThisPlayerState thisPlayerState, List<OtherPlayerState> otherPlayerStates, List<Item> items) {}
 
     public Map<String, Player> players;
@@ -59,7 +59,7 @@ public class Game {
     }
 
     public void addPlayer(String userId) {
-        players.put(userId, new Player(userId, 100, 0, new Coordinates(0, 0)));   
+        players.put(userId, new Player(userId, 100, 0, new Coordinates(0, 0), 1));   
     }
 
     public void removePlayer(String userId) {
@@ -78,10 +78,10 @@ public class Game {
                         return new OtherPlayerState(otherPlayer.userId, otherPlayer.direction, otherPlayer.coords);
                     })
                     .toList();
-                ThisPlayerState thisPlayerState = new ThisPlayerState(thisPlayer.health, thisPlayer.direction, thisPlayer.coords);
+                ThisPlayerState thisPlayerState = new ThisPlayerState(thisPlayer.health, thisPlayer.direction, thisPlayer.coords, thisPlayer.weaponIdx);
                 return new GameState(thisPlayerState, otherPlayerStates, allItems);
             }
-            return new GameState(new ThisPlayerState(100, 0, new Coordinates(0, 0)), List.of(new OtherPlayerState("", 0, new Coordinates(0, 0))), allItems);
+            return new GameState(new ThisPlayerState(100, 0, new Coordinates(0, 0), 1), List.of(new OtherPlayerState("", 0, new Coordinates(0, 0))), allItems);
         }));
     }
 }
