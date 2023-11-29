@@ -15,7 +15,7 @@ public class Game {
     record Coordinates(int x, int y) {}
     record Item(String id, Coordinates coords, String type) {}
     record Player(String sessionId, int health, int direction, Coordinates coords) {}
-    record GameState(List<Item> items) {}
+    record GameState(List<Item> items, List<Player> players) {}
 
     public Map<String, Player> players;
     public Map<String, Item> items;
@@ -63,6 +63,6 @@ public class Game {
     }
 
     public GameState toGameState() {
-        return new GameState(items.values().stream().toList());
+        return new GameState(items.values().stream().toList(), players.values().stream().toList());
     }
 }
