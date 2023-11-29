@@ -4,8 +4,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
+
+import com.battleclub.gameserver.PlayerState.OtherPlayerState;
+import com.battleclub.gameserver.PlayerState.ThisPlayerState;
 
 import lombok.Data;
 
@@ -14,8 +18,8 @@ import lombok.Data;
 public class Game {
     record Coordinates(int x, int y) {}
     record Item(String id, Coordinates coords, String type) {}
-    record Player(String sessionId, int health, int direction, Coordinates coords) {}
-    record GameState(List<Item> items, List<Player> players) {}
+    record Player(String userId, int health, int direction, Coordinates coords) {}
+    record GameState(ThisPlayerState thisPlayerState, List<OtherPlayerState> otherPlayerStates, List<Item> items) {}
 
     public Map<String, Player> players;
     public Map<String, Item> items;
@@ -54,15 +58,30 @@ public class Game {
         );
     }
 
-    public void addPlayer(String sessionId) {
-        players.put(sessionId, new Player(sessionId, 100, 0, new Coordinates(0, 0)));   
+    public void addPlayer(String userId) {
+        players.put(userId, new Player(userId, 100, 0, new Coordinates(0, 0)));   
     }
 
-    public void removePlayer(String sessionId) {
-        players.remove(sessionId);
+    public void removePlayer(String userId) {
+        players.remove(userId);
     }
 
-    public GameState toGameState() {
-        return new GameState(items.values().stream().toList(), players.values().stream().toList());
+    public Map<String, GameState> toGameStates() {
+        // items are the same for everyone
+        List<Item> allItems = items.values().stream().toList();
+        return players.entrySet().stream().collect(Collectors.toMap((playerEntry) -> playerEntry.getKey(), (playerEntry) -> {
+            Player thisPlayer = playerEntry.getValue();
+            if (thisPlayer != null) {
+                List<OtherPlayerState> otherPlayerStates = players.values().stream()
+                    .filter((player) -> player.userId != thisPlayer.userId)
+                    .map((otherPlayer) -> {
+                        return new OtherPlayerState(otherPlayer.userId, otherPlayer.direction, otherPlayer.coords);
+                    })
+                    .toList();
+                ThisPlayerState thisPlayerState = new ThisPlayerState(thisPlayer.health, thisPlayer.direction, thisPlayer.coords);
+                return new GameState(thisPlayerState, otherPlayerStates, allItems);
+            }
+            return new GameState(new ThisPlayerState(100, 0, new Coordinates(0, 0)), List.of(new OtherPlayerState("", 0, new Coordinates(0, 0))), allItems);
+        }));
     }
 }
