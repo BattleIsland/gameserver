@@ -1,14 +1,13 @@
 package com.battleclub.gameserver;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
 public class PlayerInputMessage {
-    private boolean isMoving;
-    private String direction;
-    private boolean isUsingCurrentWeapon;
-    private boolean isSwitchingWeapon;
-    private Integer newWeaponIndex;
+    private List<String> keysSelected;
+    private Integer angle;
 }

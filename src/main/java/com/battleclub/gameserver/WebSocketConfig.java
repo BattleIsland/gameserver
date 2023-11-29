@@ -22,9 +22,4 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         registry.addEndpoint("/websocket-endpoint")
             .setAllowedOrigins("http://localhost:3000");
     }
-
-    @Override
-    public void configureClientInboundChannel(org.springframework.messaging.simp.config.ChannelRegistration registration) {
-        registration.interceptors(new PlayerJoinInterceptor());
-    }
 }
