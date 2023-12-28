@@ -8,28 +8,39 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
+import com.battleclub.gameserver.Game.Coordinates;
 import com.battleclub.gameserver.Game.GameState;
+import com.battleclub.gameserver.Game.Player;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Configuration
 @EnableScheduling
 @Slf4j
+@AllArgsConstructor
 public class GameUpdateLoop {
+    private final Users users;
+
+    private final PlayerMovement playerMovement;
+
+    private final CoordinateUtils coordinateUtils;
+
+    private final WeaponSelection weaponSelection;
+
     private final Game game;
 
     private final SimpMessagingTemplate messagingTemplate;
 
-    @Autowired
-    public GameUpdateLoop(SimpMessagingTemplate messagingTemplate, Game game) {
-        this.messagingTemplate = messagingTemplate;
-        this.game = game;
-    }
+    private final PlayerInputManager playerInputManager;
 
     @Scheduled(fixedRate = 1000 / 60) // 1 second divided by 60 = 60 tps (ticks per second)
     public void update() {
+        // pop out all player inputs and apply on game
+        playerInputManager.popAll().stream().forEach(this::applyPlayerInput);
+
         game.update();
         ObjectMapper objectMapper = new ObjectMapper();
 
@@ -45,7 +56,24 @@ public class GameUpdateLoop {
                 log.error("error with objectmapper", e);
             }
         });
+    }
 
-        
+    private void applyPlayerInput(PlayerInputManager.PlayerInput playerInput) {
+        String sessionId = playerInput.sessionId();
+        PlayerInputMessage playerInputMessage = playerInput.playerInputMessage();
+        String userId = users.getUsers().get(sessionId).userId();
+        Player oldPlayerValue = game.players.get(userId);
+        if (oldPlayerValue != null) {
+            // net movement is calculated from player input keys selected
+            Coordinates netMovement = playerMovement.calculateNetMovement(playerInputMessage.getKeysSelected());
+            Coordinates newCoords = coordinateUtils.add(netMovement, oldPlayerValue.coords());
+            int inputWeaponIdx = weaponSelection.getWeaponIndex(playerInputMessage.getKeysSelected());
+            // if -1, then retain old weapon idx else use input weapon idx
+            int newWeaponIdx = inputWeaponIdx == -1 ? oldPlayerValue.weaponIdx() : inputWeaponIdx;
+            // new player value is composed of net movement + old player coords and player input angle
+            Player newPlayerValue = new Player(userId, oldPlayerValue.health(), playerInputMessage.getAngle(), newCoords, newWeaponIdx);
+            // records are immutable so we need to copy over all old values, merge them with new ones and then add back into concurrent map
+            game.players.put(userId, newPlayerValue);
+        }
     }
 }
