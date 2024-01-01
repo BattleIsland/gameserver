@@ -20,6 +20,6 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/websocket-endpoint")
-            .setAllowedOrigins("http://localhost:3000", "https://dirty-cities-peel.loca.lt", "http://dirty-cities-peel.loca.lt");          
+            .setAllowedOrigins("http://localhost:3000", "http://localhost:8080", "https://dirty-cities-peel.loca.lt", "http://dirty-cities-peel.loca.lt");          
     }
 }

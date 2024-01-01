@@ -1,4 +1,4 @@
-package com.battleclub.gameserver;
+package com.battleclub.gameserver.player;
 
 import java.util.List;
 import java.util.Map;
@@ -6,7 +6,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.battleclub.gameserver.Game;
 import com.battleclub.gameserver.Game.Coordinates;
+import com.battleclub.utils.CoordinateUtils;
 
 @Component
 public class PlayerMovement {

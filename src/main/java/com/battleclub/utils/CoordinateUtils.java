@@ -1,7 +1,8 @@
-package com.battleclub.gameserver;
+package com.battleclub.utils;
 
 import org.springframework.stereotype.Component;
 
+import com.battleclub.gameserver.Game;
 import com.battleclub.gameserver.Game.Coordinates;
 
 @Component

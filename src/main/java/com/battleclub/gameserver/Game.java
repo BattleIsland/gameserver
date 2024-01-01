@@ -8,18 +8,18 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import com.battleclub.gameserver.PlayerState.OtherPlayerState;
-import com.battleclub.gameserver.PlayerState.ThisPlayerState;
+import com.battleclub.gameserver.player.PlayerState.OtherPlayerState;
+import com.battleclub.gameserver.player.PlayerState.ThisPlayerState;
 
 import lombok.Data;
 
 @Component
 @Data
 public class Game {
-    record Coordinates(double x, double y) {}
-    record Item(String id, Coordinates coords, String type) {}
-    record Player(String userId, int health, int direction, Coordinates coords, int weaponIdx) {}
-    record GameState(ThisPlayerState thisPlayerState, List<OtherPlayerState> otherPlayerStates, List<Item> items) {}
+    public record Coordinates(double x, double y) {}
+    public record Item(String id, Coordinates coords, String type) {}
+    public record Player(String userId, int health, int direction, Coordinates coords, int weaponIdx) {}
+    public record GameState(ThisPlayerState thisPlayerState, List<OtherPlayerState> otherPlayerStates, List<Item> items) {}
 
     public Map<String, Player> players;
     public Map<String, Item> items;

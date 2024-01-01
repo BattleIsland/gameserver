@@ -1,4 +1,4 @@
-package com.battleclub.gameserver;
+package com.battleclub.utils;
 
 import java.util.List;
 import java.util.Optional;
