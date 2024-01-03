@@ -1,4 +1,4 @@
-package com.battleclub.gameserver.networking;
+package com.gameserver.networking;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

@@ -1,4 +1,4 @@
-package com.battleclub.gameserver.game;
+package com.gameserver.game;
 
 import java.util.Map;
 
@@ -8,17 +8,17 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
-import com.battleclub.gameserver.game.Game.Coordinates;
-import com.battleclub.gameserver.game.Game.GameState;
-import com.battleclub.gameserver.game.Game.Player;
-import com.battleclub.gameserver.player.PlayerInputManager;
-import com.battleclub.gameserver.player.PlayerInputMessage;
-import com.battleclub.gameserver.player.PlayerMovement;
-import com.battleclub.gameserver.user.Users;
-import com.battleclub.gameserver.utils.CoordinateUtils;
-import com.battleclub.gameserver.utils.WeaponSelection;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gameserver.game.Game.Coordinates;
+import com.gameserver.game.Game.GameState;
+import com.gameserver.game.Game.Player;
+import com.gameserver.player.PlayerInputManager;
+import com.gameserver.player.PlayerInputMessage;
+import com.gameserver.player.PlayerMovement;
+import com.gameserver.user.Users;
+import com.gameserver.utils.CoordinateUtils;
+import com.gameserver.utils.WeaponSelection;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

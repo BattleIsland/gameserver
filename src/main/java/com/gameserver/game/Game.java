@@ -1,4 +1,4 @@
-package com.battleclub.gameserver.game;
+package com.gameserver.game;
 
 import java.util.List;
 import java.util.Map;
@@ -8,8 +8,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import com.battleclub.gameserver.player.PlayerState.OtherPlayerState;
-import com.battleclub.gameserver.player.PlayerState.ThisPlayerState;
+import com.gameserver.player.PlayerState.OtherPlayerState;
+import com.gameserver.player.PlayerState.ThisPlayerState;
 
 import lombok.Data;
 

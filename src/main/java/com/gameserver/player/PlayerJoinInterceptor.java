@@ -1,4 +1,4 @@
-package com.battleclub.gameserver.player;
+package com.gameserver.player;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
@@ -7,7 +7,7 @@ import org.springframework.messaging.simp.stomp.StompCommand;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.messaging.support.ChannelInterceptor;
 
-import com.battleclub.gameserver.game.Game;
+import com.gameserver.game.Game;
 
 public class PlayerJoinInterceptor implements ChannelInterceptor {
     @Autowired

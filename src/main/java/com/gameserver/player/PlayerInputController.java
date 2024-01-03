@@ -1,4 +1,4 @@
-package com.battleclub.gameserver.player;
+package com.gameserver.player;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.Header;
