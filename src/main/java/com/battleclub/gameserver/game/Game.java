@@ -1,4 +1,4 @@
-package com.battleclub.gameserver;
+package com.battleclub.gameserver.game;
 
 import java.util.List;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.battleclub.gameserver;
+package com.battleclub.gameserver.networking;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
@@ -20,6 +20,6 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/websocket-endpoint")
-            .setAllowedOrigins("http://localhost:3000", "http://localhost:8080", "https://dirty-cities-peel.loca.lt", "http://dirty-cities-peel.loca.lt");          
+            .setAllowedOrigins("http://localhost:3000", "https://dirty-cities-peel.loca.lt", "http://dirty-cities-peel.loca.lt");          
     }
 }

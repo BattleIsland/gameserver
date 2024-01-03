@@ -1,7 +1,7 @@
 package com.battleclub.gameserver.player;
 
-import com.battleclub.gameserver.Game;
-import com.battleclub.gameserver.Game.Coordinates;
+import com.battleclub.gameserver.game.Game;
+import com.battleclub.gameserver.game.Game.Coordinates;
 
 public class PlayerState {
     // we want to see this player's health, direction, coords, basically everything

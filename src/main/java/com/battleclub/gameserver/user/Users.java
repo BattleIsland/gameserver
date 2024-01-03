@@ -1,4 +1,4 @@
-package com.battleclub.user;
+package com.battleclub.gameserver.user;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -6,7 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.battleclub.utils.RandomNameGenerator;
+import com.battleclub.gameserver.utils.RandomNameGenerator;
 
 import lombok.Data;
 

@@ -1,11 +1,11 @@
-package com.battleclub.user;
+package com.battleclub.gameserver.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;
 
-import com.battleclub.gameserver.Game;
+import com.battleclub.gameserver.game.Game;
 
 import lombok.extern.slf4j.Slf4j;
 

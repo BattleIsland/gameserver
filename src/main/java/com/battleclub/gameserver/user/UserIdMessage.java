@@ -1,4 +1,4 @@
-package com.battleclub.user;
+package com.battleclub.gameserver.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

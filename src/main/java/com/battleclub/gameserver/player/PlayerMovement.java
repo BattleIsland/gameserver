@@ -6,9 +6,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.battleclub.gameserver.Game;
-import com.battleclub.gameserver.Game.Coordinates;
-import com.battleclub.utils.CoordinateUtils;
+import com.battleclub.gameserver.game.Game;
+import com.battleclub.gameserver.game.Game.Coordinates;
+import com.battleclub.gameserver.utils.CoordinateUtils;
 
 @Component
 public class PlayerMovement {

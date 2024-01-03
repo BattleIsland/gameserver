@@ -1,4 +1,4 @@
-package com.battleclub.utils;
+package com.battleclub.gameserver.utils;
 
 import java.util.Random;
 
