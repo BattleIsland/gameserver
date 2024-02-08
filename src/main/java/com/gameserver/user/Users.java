@@ -1,10 +1,12 @@
-package com.battleclub.gameserver;
+package com.gameserver.user;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.gameserver.utils.RandomNameGenerator;
 
 import lombok.Data;
 
@@ -14,7 +16,7 @@ public class Users {
     @Autowired
     RandomNameGenerator randomNameGenerator;
 
-    record User(String userId, String userName, String sessionId) {}
+    public record User(String userId, String userName, String sessionId) {}
 
     // session id to user
     public Map<String, User> users;

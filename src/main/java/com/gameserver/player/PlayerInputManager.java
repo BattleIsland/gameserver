@@ -1,4 +1,4 @@
-package com.battleclub.gameserver;
+package com.gameserver.player;
 
 import java.util.ArrayList;
 import java.util.List;

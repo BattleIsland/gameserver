@@ -1,4 +1,4 @@
-package com.battleclub.gameserver;
+package com.gameserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

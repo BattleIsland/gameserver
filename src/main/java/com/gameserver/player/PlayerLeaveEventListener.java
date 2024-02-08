@@ -1,4 +1,4 @@
-package com.battleclub.gameserver;
+package com.gameserver.player;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -6,7 +6,9 @@ import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
-import com.battleclub.gameserver.Users.User;
+import com.gameserver.game.Game;
+import com.gameserver.user.Users;
+import com.gameserver.user.Users.User;
 
 @Component
 public class PlayerLeaveEventListener implements ApplicationListener<SessionDisconnectEvent> {
